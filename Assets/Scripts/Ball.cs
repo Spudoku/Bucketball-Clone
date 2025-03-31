@@ -7,7 +7,7 @@ using UnityEngine;
 public class Ball : MonoBehaviour
 {
     [SerializeField] float sensitivity;         // how much the power scales per unit the mouse is dragged
-
+    [SerializeField] List<Material> materials;  // stores all valid materials
     Camera cam;
     // Start is called before the first frame update
     void Start()
