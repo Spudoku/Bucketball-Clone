@@ -6,6 +6,9 @@ using UnityEngine.SceneManagement;
 
 // click and drag to aim
 // interacts with an Aimer to help the player
+
+// Represents all ball behaviors
+
 public class Ball : MonoBehaviour
 {
     [SerializeField] float sensitivity;         // how much the power scales per unit the mouse is dragged
@@ -25,6 +28,7 @@ public class Ball : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // initializing!
         cam = Camera.main;
         rb = GetComponent<Rigidbody2D>();
         isLaunched = false;
@@ -33,15 +37,17 @@ public class Ball : MonoBehaviour
         trajPredictor = GetComponent<Trajectory>();
         bounceSFX = GetComponent<AudioSource>();
 
-        if (bounceSFX != null && bounceSFX.clip != null)
-        {
-            bounceSFX.PlayOneShot(bounceSFX.clip, 0); // Preload clip silently
-        }
+        // // preload sound clip
+        // if (bounceSFX != null && bounceSFX.clip != null)
+        // {
+        //     bounceSFX.PlayOneShot(bounceSFX.clip, 0); // Preload clip silently
+        // }
     }
 
     void Update()
     {
-        // only launch once
+        // only launch once; outcome should always be either a win (in the bucket and correct color)
+        // or loss (hit screen edge, in bucket but wrong color)
         if (!isLaunched)
         {
             rb.gravityScale = 0;
@@ -69,13 +75,17 @@ public class Ball : MonoBehaviour
     }
 
 
+    // get rid of the ball
+    // prepare to advance to next level
     public IEnumerator Yay()
     {
         rb.linearVelocity = new();
         yield return new WaitForSeconds(1.5f);
         Explode();
     }
+
     // Get rid of the ball
+    // play effects
     private void Explode()
     {
         // particle effects
@@ -84,6 +94,7 @@ public class Ball : MonoBehaviour
         Destroy(gameObject);
     }
 
+    // return a Vector for initial velocity of the ball
     private Vector2 CalcTrajectory()
     {
 

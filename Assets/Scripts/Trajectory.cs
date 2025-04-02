@@ -1,6 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+// Displays a predicted trajectory
+// when given a starting vector
 public class Trajectory : MonoBehaviour
 {
 
@@ -8,7 +10,7 @@ public class Trajectory : MonoBehaviour
     [SerializeField] int steps;             // number of objects shown. Should be relatively low (~10-15)
     [SerializeField] float interval;        // time interval between steps, in seconds
 
-    private List<GameObject> pointers = new List<GameObject>();
+    private List<GameObject> pointers = new();
 
     public bool isVisible;
 
@@ -18,7 +20,7 @@ public class Trajectory : MonoBehaviour
 
         float scale = 0.5f;
 
-        // create pointers
+        // create pointer objects
         for (int i = 0; i < steps; i++)
         {
             GameObject newPointer = Instantiate(pointer);
@@ -30,6 +32,7 @@ public class Trajectory : MonoBehaviour
 
     void Update()
     {
+        // change visibility of each pointer
         foreach (GameObject p in pointers)
         {
             p.SetActive(isVisible);
@@ -47,8 +50,11 @@ public class Trajectory : MonoBehaviour
         float theta = Mathf.Atan2(y, x);
 
         float t = 0.0001f;
+
+        // position the pointer objects based on a time interval
         for (int i = 0; i < pointers.Count; i++)
         {
+            // calculate predicted position
             GameObject p = pointers[i];
             float px = speed * Mathf.Cos(theta) * t + transform.position.x;
             float py = speed * Mathf.Sin(theta) * t + 0.5f * Physics.gravity.y * t * t;
@@ -56,8 +62,6 @@ public class Trajectory : MonoBehaviour
             p.transform.position = new(px, py);
 
             t += interval;
-
-
         }
     }
 

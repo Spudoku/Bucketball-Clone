@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+// Represents all behaviors with Buckets
 public class Bucket : MonoBehaviour
 {
 
     [SerializeField] List<Material> materials;  // stores all valid materials
     private Renderer r;
-    // Start is called before the first frame update
+
     void Start()
     {
         RefreshChildren();
@@ -16,6 +17,8 @@ public class Bucket : MonoBehaviour
     }
 
     // update child objects to have the same material as the main object
+    // Through trial and error, I need to use shared materials for 
+    // comparison's sake
     private void RefreshChildren()
     {
         Renderer renderer = GetComponent<Renderer>();
@@ -27,6 +30,8 @@ public class Bucket : MonoBehaviour
         }
     }
 
+    // Advance the game IF the ball is the right color
+    // (material-based)
     void OnTriggerEnter2D(Collider2D collision)
     {
         Debug.Log("Something triggered me!");
@@ -49,6 +54,8 @@ public class Bucket : MonoBehaviour
         }
     }
 
+    // advance to next level after letting the player
+    // process what happened
     private IEnumerator WinLevel()
     {
 
