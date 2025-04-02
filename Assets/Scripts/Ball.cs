@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+[RequireComponent(typeof(Trajectory))]
 
 // click and drag to aim
 // interacts with an Aimer to help the player
@@ -11,7 +12,7 @@ public class Ball : MonoBehaviour
     [SerializeField] float maxPower;
     [SerializeField] List<Material> materials;  // stores all valid materials
 
-
+    Trajectory trajPredictor;
     Camera cam;
 
     Rigidbody2D rb;
@@ -26,6 +27,8 @@ public class Ball : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         isLaunched = false;
         trajectory = new();
+
+        trajPredictor = GetComponent<Trajectory>();
     }
 
     void Update()
@@ -84,6 +87,7 @@ public class Ball : MonoBehaviour
         Vector3 pos = transform.position;
         Vector3 traj = Vector3.ClampMagnitude((-(mousePos - pos)) * sensitivity, maxPower);
         //Debug.Log($"Trajectory: {traj}");
+        trajPredictor.CalcTrajectory(traj);
         return traj;
     }
 
