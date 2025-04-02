@@ -19,6 +19,8 @@ public class Ball : MonoBehaviour
 
     bool isLaunched;
     private Vector2 trajectory;
+
+    private AudioSource bounceSFX;
     //bool isDragged;
     // Start is called before the first frame update
     void Start()
@@ -29,6 +31,7 @@ public class Ball : MonoBehaviour
         trajectory = new();
 
         trajPredictor = GetComponent<Trajectory>();
+        bounceSFX = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -42,6 +45,7 @@ public class Ball : MonoBehaviour
             if (Input.GetButton("Fire1"))
             {
                 // prepare a trajectory
+                trajPredictor.isVisible = true;
                 trajectory = CalcTrajectory();
             }
 
@@ -113,5 +117,13 @@ public class Ball : MonoBehaviour
         if (pos.y < 0.0) return true;
         if (1.0 < pos.y) return true;
         return false;
+    }
+
+    void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (bounceSFX != null)
+        {
+            bounceSFX.PlayOneShot(bounceSFX.clip);
+        }
     }
 }
