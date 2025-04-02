@@ -32,6 +32,11 @@ public class Ball : MonoBehaviour
 
         trajPredictor = GetComponent<Trajectory>();
         bounceSFX = GetComponent<AudioSource>();
+
+        if (bounceSFX != null && bounceSFX.clip != null)
+        {
+            bounceSFX.PlayOneShot(bounceSFX.clip, 0); // Preload clip silently
+        }
     }
 
     void Update()
@@ -123,7 +128,7 @@ public class Ball : MonoBehaviour
     {
         if (bounceSFX != null)
         {
-            bounceSFX.PlayOneShot(bounceSFX.clip);
+            bounceSFX.Play();
         }
     }
 }
