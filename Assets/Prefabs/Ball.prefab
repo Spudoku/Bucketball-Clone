@@ -185,8 +185,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   pointer: {fileID: 2727586006597596847, guid: a4dfeb7c2aac4a24e9a19f5509e4eea3, type: 3}
-  steps: 10
-  interval: 0.2
+  steps: 6
+  interval: 0.15
   isVisible: 0
 --- !u!82 &7526309643411981368
 AudioSource:

@@ -268,7 +268,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5b7a7abf27c01e43b57251271a14cec, type: 3}
---- !u!1001 &1042153923
+--- !u!1001 &2113109357
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -316,14 +316,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6529557256162069629, guid: 2213645c5733d3944bdf2acaec1b0360, type: 3}
-      propertyPath: steps
-      value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 6529557256162069629, guid: 2213645c5733d3944bdf2acaec1b0360, type: 3}
-      propertyPath: interval
-      value: 0.1
-      objectReference: {fileID: 0}
     - target: {fileID: 7198974633447429447, guid: 2213645c5733d3944bdf2acaec1b0360, type: 3}
       propertyPath: m_Name
       value: Ball
@@ -339,4 +331,4 @@ SceneRoots:
   m_Roots:
   - {fileID: 519420032}
   - {fileID: 1007320065}
-  - {fileID: 1042153923}
+  - {fileID: 2113109357}
