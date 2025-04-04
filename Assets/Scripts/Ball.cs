@@ -13,7 +13,9 @@ public class Ball : MonoBehaviour
 {
     [SerializeField] float sensitivity;         // how much the power scales per unit the mouse is dragged
     [SerializeField] float maxPower;
-    [SerializeField] List<Material> materials;  // stores all valid materials
+
+    [SerializeField] AudioSource bounceSFX;
+    [SerializeField] AudioSource wheeSFX;
 
     Trajectory trajPredictor;
     Camera cam;
@@ -23,7 +25,11 @@ public class Ball : MonoBehaviour
     bool isLaunched;
     private Vector2 trajectory;
 
-    private AudioSource bounceSFX;
+
+
+    private bool playSound = false;
+
+    ParticleSystem particles;
     //bool isDragged;
     // Start is called before the first frame update
     void Start()
@@ -35,7 +41,8 @@ public class Ball : MonoBehaviour
         trajectory = new();
 
         trajPredictor = GetComponent<Trajectory>();
-        bounceSFX = GetComponent<AudioSource>();
+
+        particles = GetComponent<ParticleSystem>();
 
         // // preload sound clip
         // if (bounceSFX != null && bounceSFX.clip != null)
@@ -72,6 +79,17 @@ public class Ball : MonoBehaviour
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
+
+        if (playSound)
+        {
+            if (bounceSFX != null)
+            {
+                bounceSFX.pitch = Mathf.Clamp(rb.linearVelocity.magnitude / maxPower, 0.5f, 1.25f);
+                bounceSFX.PlayOneShot(bounceSFX.clip);
+            }
+
+            playSound = false;
+        }
     }
 
 
@@ -79,7 +97,8 @@ public class Ball : MonoBehaviour
     // prepare to advance to next level
     public IEnumerator Yay()
     {
-        rb.linearVelocity = new();
+        //rb.linearVelocity = new();
+        particles.Play();
         yield return new WaitForSeconds(1.5f);
         Explode();
     }
@@ -119,6 +138,10 @@ public class Ball : MonoBehaviour
         isLaunched = true;
 
         // play sound effect?
+        if (wheeSFX != null)
+        {
+            wheeSFX.Play();
+        }
     }
 
     private bool IsTouchingScreenEdge()
@@ -137,9 +160,6 @@ public class Ball : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D collision)
     {
-        if (bounceSFX != null)
-        {
-            bounceSFX.Play();
-        }
+        playSound = true;
     }
 }

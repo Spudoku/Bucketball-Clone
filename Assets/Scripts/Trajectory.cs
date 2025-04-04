@@ -10,6 +10,7 @@ public class Trajectory : MonoBehaviour
     [SerializeField] int steps;             // number of objects shown. Should be relatively low (~10-15)
     [SerializeField] float interval;        // time interval between steps, in seconds
 
+
     private List<GameObject> pointers = new();
 
     public bool isVisible;
@@ -57,7 +58,7 @@ public class Trajectory : MonoBehaviour
             // calculate predicted position
             GameObject p = pointers[i];
             float px = speed * Mathf.Cos(theta) * t + transform.position.x;
-            float py = speed * Mathf.Sin(theta) * t + 0.5f * Physics.gravity.y * t * t;
+            float py = speed * Mathf.Sin(theta) * t + 0.5f * Physics.gravity.y * t * t + transform.position.y;
 
             p.transform.position = new(px, py);
 

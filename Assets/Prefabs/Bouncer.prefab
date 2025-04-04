@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 943893125372217549}
   - component: {fileID: 3777858698021337517}
   m_Layer: 0
-  m_Name: Obstacle
+  m_Name: Bouncer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,7 +56,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: acc12bd113fe84848baeac76214f7be2, type: 2}
+  - {fileID: 2100000, guid: 35ef34cfdc8ced74784554ed608fff34, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,7 +98,7 @@ BoxCollider2D:
   m_Enabled: 1
   serializedVersion: 3
   m_Density: 1
-  m_Material: {fileID: 6200000, guid: 3f43a289a62032348a62698d652d9f24, type: 2}
+  m_Material: {fileID: 6200000, guid: 15fda9f4fa94b6a4e8fadbba28753f36, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
